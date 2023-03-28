@@ -12,7 +12,7 @@ StreetStat allows you to view data in real-time or over a specific time period. 
 
 # Features
 
-Object detection technology to count vehicles
-Real-time data and analytics
-Historical data and trend analysis
-Customizable settings and filters
+- Object detection technology to count vehicles
+- Real-time data and analytics
+- Historical data and trend analysis
+- Customizable settings and filters
