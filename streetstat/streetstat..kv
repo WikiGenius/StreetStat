@@ -1,0 +1,288 @@
+# Author: Muhammed Elyamani
+# Date: 03/02/2023
+# GitHub: https://github.com/WikiGenius
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:set light_red_color get_color_from_hex("#F63D54")
+#:set light_blue_color get_color_from_hex("#027FFF")
+#:set light_Purple_color  get_color_from_hex("#8876FE")
+#:set dark_Blue_color   get_color_from_hex("#0D1386")
+#:set dark_Purple_color get_color_from_hex("#3C44C3")
+#:set white_color get_color_from_hex("#ffffff")
+#:set black_color get_color_from_hex("#000000")
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: light_Purple_color
+    text_color: white_color
+    icon_color: white_color
+    selected_color: white_color
+<MainScreen>:
+    detection_image: detection_image
+    upload_video_button: upload_video_button
+    people_count:people_count
+    analyse_button: analyse_button
+    gender_M:gender_M
+    gender_F:gender_F
+    avg_age:avg_age
+    conf_thres:conf_thres
+    iou_thres: iou_thres
+    face_thres: face_thres
+    vis: vis
+    
+    MDScreen:
+        MDNavigationLayout:
+            MDScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y:0.07
+                        pos_hint: {"top": 1}
+                        md_bg_color: black_color
+                        specific_text_color: white_color
+                        MDNavigationRailMenuButton:
+                            on_release: nav_drawer.set_state("open")
+                        Image:
+                            source: './data/logo.png'
+                            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+                    FloatLayout:
+                        Image:
+                            id: detection_image
+                            source: './data/upload.png'
+                            opacity: 0.1
+                            keep_ratio: True
+                            size_hint_y: 0.6
+                            pos_hint: {'center_x': 0.5, 'top': 0.92}
+                        MDFillRoundFlatButton:
+                            id: analyse_button
+                            markup:True
+                            size_hint: 0.07, None
+                            height: dp(48)
+                            pos_hint: {'center_x': 0.5,'top': 0.35}
+                            text: '[font=Montserrat]ANALYZE[/font]'
+                            font_size: dp(20)
+                            on_release: app.analyse_button()
+                            md_bg_color: light_Purple_color
+                        FloatLayout:
+                            size_hint: 1, 0.24
+                            BoxLayout:
+                                orientation: 'vertical'
+                                pos_hint: {'center_y': 0.5, 'x': 0.1}
+                                size_hint_x: 0.15
+                                Label:
+                                    id:people_count
+                                    markup:True
+                                    text: "[font=Montserrat]0[/font]"
+                                    halign: 'center'
+                                    color: black_color
+                                    font_size:self.height * 0.8
+                                    canvas.before:
+                                        Color:
+                                            rgba: white_color
+                                        RoundedRectangle:
+                                            radius: self.width / 6,
+                                            pos: self.pos
+                                            size: self.size
+
+                                Label:
+                                    markup:True
+                                    theme_text_color: "Custom"
+                                    text: "[font=Montserrat]People[/font]"
+                                    halign: 'center'
+                                    text_color: white_color
+                                    font_size:self.height * 0.4
+
+                            BoxLayout:
+                                orientation: 'vertical'
+                                pos_hint: {'center_y': 0.5, 'center_x': 0.5}
+                                size_hint_x: 0.15
+                                Label:
+                                    id:avg_age
+                                    markup:True
+                                    theme_text_color: "Custom"
+                                    text: "[font=Montserrat]0[/font]"
+                                    halign: 'center'
+                                    color: black_color
+                                    font_size:self.height * 0.8
+                                    canvas.before:
+                                        Color:
+                                            rgba: white_color
+                                        RoundedRectangle:
+                                            radius: self.width / 6,
+                                            pos: self.pos
+                                            size: self.size
+
+                                Label:
+                                    markup:True
+                                    theme_text_color: "Custom"
+                                    text: "[font=Montserrat]Avg Age[/font]"
+                                    halign: 'center'
+                                    text_color: white_color
+                                    font_size:self.height * 0.4
+
+                            FloatLayout:
+                                pos_hint: {'center_y': 0.75, 'right': 0.95}
+
+                                size_hint: 0.25, 0.5
+                                Label:
+                                    id: gender_F
+                                    markup:True
+                                    theme_text_color: "Custom"
+                                    text: "[font=Montserrat]F[/font]"
+                                    halign: 'center'
+                                    size_hint_x:0.5
+                                    color: black_color
+                                    font_size:self.height * 0.8
+                                    pos_hint: {'center_y': 0.5, 'right': 1}
+                                    canvas.before:
+                                        Color:
+                                            rgba: white_color
+                                        RoundedRectangle:
+                                            radius: self.width / 6, 
+                                            pos: self.pos
+                                            size: self.size
+                                Label:
+                                    id: gender_M
+                                    markup:True
+                                    theme_text_color: "Custom"
+                                    text: "[font=Montserrat]M[/font]"
+                                    halign: 'center'
+                                    md_bg_color: light_Purple_color
+                                    size_hint_x:0.5
+                                    color: white_color
+                                    font_size:self.height * 0.8
+                                    pos_hint: {'center_y': 0.5, 'x': 0.1}
+                                    canvas.before:
+                                        Color:
+                                            rgba: light_Purple_color
+                                        RoundedRectangle:
+                                            radius: self.width / 6,
+                                            pos: self.pos
+                                            size: self.size
+
+            MDNavigationDrawer:
+                id: nav_drawer
+                radius: (0, 16, 16, 0)
+                width: "240dp"
+                enable_swiping:False
+                anchor: "left"
+
+                MDNavigationDrawerMenu:
+
+                    MDNavigationDrawerHeader:
+                        text: "Settings"
+                        padding: "12dp", 0, 0, "56dp"
+                    DrawerClickableItem:
+                        id: upload_video_button
+                        markup:True
+                        text: "[font=Montserrat]Upload[/font]"
+                        icon: "upload"
+                        on_release: app.upload_video()
+                    MDNavigationDrawerDivider:
+
+                    MDNavigationDrawerLabel:
+                        text: "[font=Montserrat]CONFIDENCE LEVEL[/font]"
+                    MyLayout:
+                        Myslider:
+                            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+                            id: conf_thres
+                            min: 0
+                            max: 100
+                            value: 25
+                    MDNavigationDrawerDivider:
+                    
+                    MDNavigationDrawerLabel:
+                        text: "[font=Montserrat]IOU THRESH[/font]"
+                    MyLayout:
+                        Myslider:
+                            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+                            id: iou_thres
+                            min: 0
+                            max: 100
+                            value: 45
+                    MDNavigationDrawerDivider:   
+
+                    MDNavigationDrawerLabel:
+                        text: "[font=Montserrat]FACE LEVEL[/font]"
+                    MyLayout:
+                        Myslider:
+                            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+                            id: face_thres
+                            min: 0
+                            max: 100
+                            value: 25
+                    MDNavigationDrawerDivider:
+
+                    MyLayout:
+                        MDLabel:
+                            markup:True
+                            # pos_hint: {'x': 0,'center_y': 0.5}
+                            text: "[font=Montserrat]VISUALIZATION[/font]"
+
+                        CheckBox:
+                            id: vis
+                            pos_hint: {'center_x': 0.9,'center_y': 0.5}
+                            active:True
+
+<MyLayout@MDFloatLayout>
+    adaptive_height: True
+    height: dp(40)
+
+
+<MyItem@Myslider>
+    pos_hint: {'center_x': 0.5,'center_y': 0.5}
+    id: conf_thres
+    min: 0
+    max: 100
+    value: 25
+    # adaptive_size: True
+    
+
+
+<Myslider>
+    hint: False
+    # spacing:0
+    # padding:0
+    hint_text_color: "white"
+    # hint_radius: [6, 0, 6, 0]
+    thumb_color_active: dark_Purple_color
+    thumb_color_inactive: dark_Purple_color
+    # thumb_color_disabled: light_Purple_color
+    track_color_active: light_Purple_color
+    track_color_inactive: light_Purple_color
+    show_off:True
+    active:True
+    color: light_Purple_color
+    HintBoxContainer:
+        id: hint_box_update
+        size_hint: None, None
+        md_bg_color: root.hint_bg_color if root.hint_bg_color else [0, 0, 0, 0]
+        # elevation: 1.5
+        opacity: 1 if root.active else 0
+        # radius: root.hint_radius
+        padding: "6dp", "6dp", "6dp", "8dp"
+        
+        # shadow_color:
+        #     ([0, 0, 0, 0.6] if root.hint_bg_color else [0, 0, 0, 0]) \
+        #     if root.active else \
+        #     [0, 0, 0, 0]
+        size:
+            lbl_value.width + self.padding[0] * 2, \
+            lbl_value.height + self.padding[0]
+        pos:
+            (root.value_pos[0] - dp(9), root.center_y - hint_box_update.height / 2 - dp(30)) \
+            if root.orientation == "horizontal" else \
+            (root.center_x - hint_box_update.width / 2 + dp(30), root.value_pos[1] - dp(8))
+        MDLabel:
+            id: lbl_value
+            font_style: "Caption"
+            halign: "center"
+            theme_text_color: "Custom"
+            -text_size: None, None
+            adaptive_size: True
+            pos_hint: {"center_x": .5, "center_y": .5}
+            text_color:
+                app.theme_cls.primary_color \
+                if not root.hint_text_color else root.hint_text_color
+            text:
+                str(root.value) \
+                if isinstance(root.step, float) else str(int(root.value)) + "%"
+    
