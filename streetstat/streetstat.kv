@@ -18,6 +18,7 @@
 <MainScreen>:
     detection_image: detection_image
     upload_video_button: upload_video_button
+    save_button: save_button
     analyse_button: analyse_button
 
     conf_thres:conf_thres
@@ -63,7 +64,16 @@
                             font_size: dp(20)
                             on_release: app.analyse_button()
                             md_bg_color: light_Purple_color
-                       
+                        MDFillRoundFlatButton:
+                            id: save_button
+                            markup:True
+                            size_hint: 0.07, None
+                            height: dp(48)
+                            pos_hint: {'center_x': 0.5,'y': 0.05}
+                            text: '[font=Montserrat]SAVE[/font]'
+                            font_size: dp(20)
+                            on_release: app.save_button()
+                            md_bg_color: light_Purple_color           
 
             MDNavigationDrawer:
                 id: nav_drawer

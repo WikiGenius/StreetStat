@@ -51,7 +51,8 @@ class StreetStat(StyleApp):
             text = self.screen.analyse_button.text.replace("STOP", "ANALYZE")
             self.screen.analyse_button.text = text
             self.stop_analyse()
-
+    def save_button(self):
+        pass
  
     def process_after_video(self):
         self.stop_analyse()
