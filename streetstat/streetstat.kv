@@ -24,6 +24,12 @@
     iou_thres: iou_thres
     vis: vis
     
+    person_checkbox: person_checkbox
+    car_checkbox: car_checkbox
+    motorcycle_checkbox: motorcycle_checkbox
+    bus_checkbox: bus_checkbox
+    truck_checkbox: truck_checkbox
+    bicycle_checkbox: bicycle_checkbox
     MDScreen:
         MDNavigationLayout:
             MDScreenManager:
@@ -105,13 +111,49 @@
                     MyLayout:
                         MDLabel:
                             markup:True
-                            # pos_hint: {'x': 0,'center_y': 0.5}
+                            pos_hint: {'x': 0.1,'center_y': 0.5}
                             text: "[font=Montserrat]VISUALIZATION[/font]"
-
+                            color:light_Purple_color
                         CheckBox:
                             id: vis
                             pos_hint: {'center_x': 0.9,'center_y': 0.5}
                             active:True
+                    MDNavigationDrawerDivider:   
+                    MDNavigationDrawerLabel:
+                        text: "[font=Montserrat]FILTER[/font]"
+                        padding:20,0,0,40
+                    
+            
+                    MyLayout_Filter:            
+                        Label_Filter:
+                            text: "[font=Montserrat]PERSON[/font]"
+                        CheckBoxFilter:
+                            id: person_checkbox
+                    MyLayout_Filter:
+                        Label_Filter:
+                            text: "[font=Montserrat]CAR[/font]"
+                        CheckBoxFilter:
+                            id: car_checkbox
+                    MyLayout_Filter:
+                        Label_Filter:
+                            text: "[font=Montserrat]MOTORCYCLE[/font]"
+                        CheckBoxFilter:
+                            id: motorcycle_checkbox
+                    MyLayout_Filter:
+                        Label_Filter:
+                            text: "[font=Montserrat]BUS[/font]"
+                        CheckBoxFilter:
+                            id: bus_checkbox
+                    MyLayout_Filter:
+                        Label_Filter:
+                            text: "[font=Montserrat]TRUCK[/font]"
+                        CheckBoxFilter:
+                            id: truck_checkbox
+                    MyLayout_Filter:
+                        Label_Filter:
+                            text: "[font=Montserrat]BICYCLE[/font]"
+                        CheckBoxFilter:
+                            id: bicycle_checkbox
 
 <MyLayout@MDFloatLayout>
     adaptive_height: True
@@ -125,7 +167,19 @@
     max: 100
     value: 25
     # adaptive_size: True
+
+<MyLayout_Filter@MyLayout>
+    # md_bg_color:white_color
     
+<CheckBoxFilter@CheckBox>
+    pos_hint: {'center_x': 0.9,'center_y': 0.5}
+    active:True
+    color: light_blue_color
+
+<Label_Filter@MDLabel>
+    markup:True
+    pos_hint: {'x': 0.1,'center_y': 0.5}
+    color: light_blue_color
 
 
 <Myslider>
