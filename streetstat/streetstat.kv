@@ -20,7 +20,9 @@
     upload_video_button: upload_video_button
     save_button: save_button
     analyse_button: analyse_button
-
+    
+    box_plot:box_plot
+    
     conf_thres:conf_thres
     iou_thres: iou_thres
     vis: vis
@@ -64,12 +66,16 @@
                             font_size: dp(20)
                             on_release: app.analyse_button()
                             md_bg_color: light_Purple_color
+                        MDBoxLayout:
+                            id: box_plot
+                            size_hint_y:0.4
+                            pos_hint: {'center_x': 0.5,'y': 0.12}
                         MDFillRoundFlatButton:
                             id: save_button
                             markup:True
                             size_hint: 0.07, None
                             height: dp(48)
-                            pos_hint: {'center_x': 0.5,'y': 0.05}
+                            pos_hint: {'center_x': 0.5,'y': 0.04}
                             text: '[font=Montserrat]SAVE[/font]'
                             font_size: dp(20)
                             on_release: app.save_button()

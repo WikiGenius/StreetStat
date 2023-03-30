@@ -8,8 +8,16 @@ import utils
 import re
 import time
 from kivy.core import window
+
+
 if platform !='android':
     Window.size = (400, 800)
+    
+
+class Matty(FloatLayout):
+	def __init__(self, **kwargs):
+		super().__init__(**kwargs)
+
 
 class StreetStat(StyleApp):
     if DEBUG:
@@ -21,6 +29,7 @@ class StreetStat(StyleApp):
         # Load YOLOv8n model for object detection
         self.pattern = re.compile(r'\d+')
         
+  
     def on_start(self): 
         self.process = utils.Process(self.screen, self.pattern) 
 
