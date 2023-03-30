@@ -7,7 +7,9 @@ from utils import StyleApp
 import utils
 import re
 import time
-
+from kivy.core import window
+if platform !='android':
+    Window.size = (400, 800)
 
 class StreetStat(StyleApp):
     if DEBUG:

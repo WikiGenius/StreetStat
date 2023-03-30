@@ -18,11 +18,8 @@
 <MainScreen>:
     detection_image: detection_image
     upload_video_button: upload_video_button
-    people_count:people_count
     analyse_button: analyse_button
-    gender_M:gender_M
-    gender_F:gender_F
-    avg_age:avg_age
+
     conf_thres:conf_thres
     iou_thres: iou_thres
     face_thres: face_thres
@@ -61,102 +58,7 @@
                             font_size: dp(20)
                             on_release: app.analyse_button()
                             md_bg_color: light_Purple_color
-                        FloatLayout:
-                            size_hint: 1, 0.24
-                            BoxLayout:
-                                orientation: 'vertical'
-                                pos_hint: {'center_y': 0.5, 'x': 0.1}
-                                size_hint_x: 0.15
-                                Label:
-                                    id:people_count
-                                    markup:True
-                                    text: "[font=Montserrat]0[/font]"
-                                    halign: 'center'
-                                    color: black_color
-                                    font_size:self.height * 0.8
-                                    canvas.before:
-                                        Color:
-                                            rgba: white_color
-                                        RoundedRectangle:
-                                            radius: self.width / 6,
-                                            pos: self.pos
-                                            size: self.size
-
-                                Label:
-                                    markup:True
-                                    theme_text_color: "Custom"
-                                    text: "[font=Montserrat]People[/font]"
-                                    halign: 'center'
-                                    text_color: white_color
-                                    font_size:self.height * 0.4
-
-                            BoxLayout:
-                                orientation: 'vertical'
-                                pos_hint: {'center_y': 0.5, 'center_x': 0.5}
-                                size_hint_x: 0.15
-                                Label:
-                                    id:avg_age
-                                    markup:True
-                                    theme_text_color: "Custom"
-                                    text: "[font=Montserrat]0[/font]"
-                                    halign: 'center'
-                                    color: black_color
-                                    font_size:self.height * 0.8
-                                    canvas.before:
-                                        Color:
-                                            rgba: white_color
-                                        RoundedRectangle:
-                                            radius: self.width / 6,
-                                            pos: self.pos
-                                            size: self.size
-
-                                Label:
-                                    markup:True
-                                    theme_text_color: "Custom"
-                                    text: "[font=Montserrat]Avg Age[/font]"
-                                    halign: 'center'
-                                    text_color: white_color
-                                    font_size:self.height * 0.4
-
-                            FloatLayout:
-                                pos_hint: {'center_y': 0.75, 'right': 0.95}
-
-                                size_hint: 0.25, 0.5
-                                Label:
-                                    id: gender_F
-                                    markup:True
-                                    theme_text_color: "Custom"
-                                    text: "[font=Montserrat]F[/font]"
-                                    halign: 'center'
-                                    size_hint_x:0.5
-                                    color: black_color
-                                    font_size:self.height * 0.8
-                                    pos_hint: {'center_y': 0.5, 'right': 1}
-                                    canvas.before:
-                                        Color:
-                                            rgba: white_color
-                                        RoundedRectangle:
-                                            radius: self.width / 6, 
-                                            pos: self.pos
-                                            size: self.size
-                                Label:
-                                    id: gender_M
-                                    markup:True
-                                    theme_text_color: "Custom"
-                                    text: "[font=Montserrat]M[/font]"
-                                    halign: 'center'
-                                    md_bg_color: light_Purple_color
-                                    size_hint_x:0.5
-                                    color: white_color
-                                    font_size:self.height * 0.8
-                                    pos_hint: {'center_y': 0.5, 'x': 0.1}
-                                    canvas.before:
-                                        Color:
-                                            rgba: light_Purple_color
-                                        RoundedRectangle:
-                                            radius: self.width / 6,
-                                            pos: self.pos
-                                            size: self.size
+                       
 
             MDNavigationDrawer:
                 id: nav_drawer
