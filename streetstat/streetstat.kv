@@ -22,7 +22,6 @@
 
     conf_thres:conf_thres
     iou_thres: iou_thres
-    face_thres: face_thres
     vis: vis
     
     MDScreen:
@@ -47,13 +46,13 @@
                             opacity: 0.1
                             keep_ratio: True
                             size_hint_y: 0.6
-                            pos_hint: {'center_x': 0.5, 'top': 0.92}
+                            pos_hint: {'center_x': 0.5, 'y': 0.48}
                         MDFillRoundFlatButton:
                             id: analyse_button
                             markup:True
                             size_hint: 0.07, None
                             height: dp(48)
-                            pos_hint: {'center_x': 0.5,'top': 0.35}
+                            pos_hint: {'center_x': 0.5,'y': 0.55}
                             text: '[font=Montserrat]ANALYZE[/font]'
                             font_size: dp(20)
                             on_release: app.analyse_button()
@@ -102,16 +101,6 @@
                             value: 45
                     MDNavigationDrawerDivider:   
 
-                    MDNavigationDrawerLabel:
-                        text: "[font=Montserrat]FACE LEVEL[/font]"
-                    MyLayout:
-                        Myslider:
-                            pos_hint: {'center_x': 0.5,'center_y': 0.5}
-                            id: face_thres
-                            min: 0
-                            max: 100
-                            value: 25
-                    MDNavigationDrawerDivider:
 
                     MyLayout:
                         MDLabel:

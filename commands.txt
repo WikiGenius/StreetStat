@@ -1,0 +1,1 @@
+python /home/muhammed/Main/programming/upwork/clients/Ritesh-Kanjee-YOLO/StreetStat/.venv/bin/garden install matplotlib

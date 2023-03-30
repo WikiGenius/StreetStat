@@ -75,7 +75,7 @@ class StyleApp(MDApp):
         Call plyer filechooser API to run a filechooser Activity.
         '''
         # filters = [ '*.mp4']  # add more video file extensions here
-        filters = [ '*.mkv']  # add more video file extensions here
+        filters = [ ]  # add more video file extensions here
         path = './assets/videos/*'
         filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
 
