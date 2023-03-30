@@ -4,7 +4,7 @@
 
 # Import necessary packages
 from conf import *
-
+import matplotlib.pyplot as plt
 from kivy import platform
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
@@ -39,3 +39,8 @@ class MainScreen(Screen):
     pass       
 
     
+def create_figure_bar(fig, ax):
+    ax.set_xlabel('FRAME')
+    ax.set_ylabel('COUNT')
+
+    return fig, ax

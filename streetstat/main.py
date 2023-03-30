@@ -8,7 +8,9 @@ import utils
 import re
 import time
 from kivy.core import window
-
+from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
+import matplotlib.pyplot as plt
+import numpy as np
 
 if platform !='android':
     Window.size = (400, 800)
@@ -31,8 +33,10 @@ class StreetStat(StyleApp):
         
   
     def on_start(self): 
-        self.process = utils.Process(self.screen, self.pattern) 
-
+        
+        # Create initial bar chart
+        self.create_init_bar(size_bar = 6)
+        self.process = utils.Process(self.screen, self.pattern, self.canvas,  self.fig, self.ax, self.size_bar ) 
         
     def on_stop(self):
         # Stop the detector when the app is closed
@@ -63,6 +67,22 @@ class StreetStat(StyleApp):
     def save_button(self):
         pass
  
+ 
+    def create_init_bar(self, size_bar = 6):
+        box_plot = self.screen.box_plot
+        self.size_bar = size_bar
+        fig, ax = plt.subplots()
+        # fig.set_size_inches(8, 6)
+        
+        # Adjust the padding of the plot
+        fig.subplots_adjust(bottom=0.2)
+        self.fig, self.ax = create_figure_bar(fig, ax)
+        
+        self.canvas = FigureCanvasKivyAgg(self.fig)
+        box_plot.add_widget(self.canvas)
+        x = np.arange(size_bar)
+        y = np.random.randint(1, 10, size=size_bar)
+        self.ax.bar(x, y)
     def process_after_video(self):
         self.stop_analyse()
 

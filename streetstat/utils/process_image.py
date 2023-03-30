@@ -5,14 +5,18 @@
 from conf import *
 import utils
 import numpy as np
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 import matplotlib.pyplot as plt
+from utils.layout import create_figure_bar
 
 class Process:
-    def __init__(self, screen, pattern):
+    def __init__(self, screen, pattern, canvas,  fig, ax, size_bar ):
         self.screen = screen
         self.pattern = pattern
         self.visualize = False
+        self.canvas = canvas
+        self.fig = fig
+        self.ax = ax 
+        self.size_bar = size_bar
         
     def detect_traffic(self, frame):
         conf_thres = self.screen.conf_thres.value / 100
@@ -27,11 +31,10 @@ class Process:
         
         return frame_vis
     def update_bar(self):
-        x = [1,2,3,4,5]
-        y = [6, 12, 6,9,15]
-
-        plt.plot(x, y)
-        plt.ylabel('Y Axis')
-        plt.xlabel('X Axis')
-        box_plot = self.screen.box_plot
-        box_plot.add_widget(FigureCanvasKivyAgg(plt.gcf()))
+        # Update bar chart with new data
+        x = np.arange(self.size_bar)
+        y = np.random.randint(1, 10, size=self.size_bar)
+        self.ax.clear()
+        self.fig, self.ax = create_figure_bar(self.fig, self.ax)
+        self.ax.bar(x, y)
+        self.canvas.draw()
