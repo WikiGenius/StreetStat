@@ -16,11 +16,20 @@ class StyleApp(MDApp):
         self.fps = 33
         self.frame_count = 0
         
-    def build(self):
-        # Create instance of MainScreen
-        self.screen = MainScreen(name='main')
-        # Return the instance of MainScreen
-        return self.screen
+
+    if DEBUG:
+        
+        def build_app(self, first=False):
+            # Create instance of MainScreen
+            self.screen = MainScreen(name='main')
+            # Return the instance of MainScreen
+            return self.screen    
+    else:
+        def build(self):
+            # Create instance of MainScreen
+            self.screen = MainScreen(name='main')
+            # Return the instance of MainScreen
+            return self.screen    
     
     def analyse_image(self, frame):
         return frame

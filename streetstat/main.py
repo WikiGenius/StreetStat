@@ -3,7 +3,6 @@
 # GitHub: https://github.com/WikiGenius
 
 from utils.layout import *
-from conf import *
 from utils import StyleApp
 import utils
 import re
@@ -11,8 +10,10 @@ import time
 
 
 class StreetStat(StyleApp):
-    pass
-        
+    if DEBUG:
+        DEBUG = DEBUG  
+        KV_FILES = ["./streetstat.kv"]
 
 if __name__ == '__main__':
     StreetStat().run()
+    
