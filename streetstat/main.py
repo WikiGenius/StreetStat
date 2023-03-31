@@ -75,7 +75,7 @@ class StreetStat(StyleApp):
     def create_init_bar(self):
         box_plot = self.screen.box_plot
         self.fig, self.ax = plt.subplots(figsize=(6, 4))
-        self.fig, self.ax = create_figure_bar(self.fig, self.ax)
+        create_figure_bar(self.fig, self.ax)
         
         self.fig.subplots_adjust(bottom=0.2, left=0.15)
 
