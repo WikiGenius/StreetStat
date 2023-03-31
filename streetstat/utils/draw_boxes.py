@@ -3,8 +3,9 @@
 # GitHub: https://github.com/WikiGenius
 
 from asone.utils.draw import *
-def draw_traffic(img, dets, visualize = True, identities=None, draw_trails=False, offset=(0, 0), class_names=None):
-
+def draw_traffic(img, dets, visualize = True, identities=None, draw_trails=False, offset=(0, 0), class_names=None, filter_classes=None):
+    counts_dict = {cls.lower(): 0 for cls in filter_classes}
+    colors_dict = {cls.lower(): None for cls in filter_classes}
     if dets is not None: 
         bbox_xyxy = dets[:, :4]
         scores = dets[:, 4]
@@ -37,7 +38,12 @@ def draw_traffic(img, dets, visualize = True, identities=None, draw_trails=False
             
             label = f'{obj_name}' if id is None else f'{id}'
 
-                
+            if label not in counts_dict.keys():
+                continue
+            counts_dict[label] += 1
+            if not colors_dict[label]:
+                colors_dict[label] = bgr_to_hex(color)
+
             if visualize:
                 draw_ui_box(box, img, label=label, color=color, line_thickness=2)
     
@@ -53,6 +59,10 @@ def draw_traffic(img, dets, visualize = True, identities=None, draw_trails=False
                 data_deque[id].appendleft(center)    
                 drawtrails(data_deque, id, color, img)
                 
-    return img
+    return img, counts_dict, colors_dict
 
 
+def bgr_to_hex(bgr):
+    """Converts an RGB tuple to a hex string."""
+    b, g, r = bgr
+    return "#{:02x}{:02x}{:02x}".format(r, g, b)

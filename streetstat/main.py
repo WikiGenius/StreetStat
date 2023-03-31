@@ -87,7 +87,7 @@ class StreetStat(StyleApp):
         self.stop_analyse()
 
     def stop_analyse(self):
-
+        self.process.reset_bar_chart()
         self.fps = 33
     
 if __name__ == '__main__':

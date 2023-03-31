@@ -44,6 +44,8 @@ class MainScreen(Screen):
 
     
 def create_figure_bar(fig, ax):
+    ax.set_xticklabels([" " for i in range(len(classes))])
+
     ax.set_xlabel('Time (S)')
     ax.set_ylabel('Count')
     ax.set_title('Object Count per Sec')

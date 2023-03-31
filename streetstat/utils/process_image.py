@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils.layout import create_figure_bar
 import random
+import matplotlib.colors as mcolors
 
 class Process:
     def __init__(self, screen, pattern, canvas, fig, ax):
@@ -30,10 +31,10 @@ class Process:
         iou_thres = self.screen.iou_thres.value / 100
         self.bar_plots = []
         dets, frame_info = detector.detect(frame, conf_thres=conf_thres, iou_thres=iou_thres)
-        frame_vis = utils.draw_traffic(frame, dets, visualize=self.visualize)
-
+        frame_vis, counts_dict, colors_dict = utils.draw_traffic(frame, dets, visualize=self.visualize, filter_classes=classes)
         # Generate random counts for each object class for this frame
-        counts = [random.randint(1, 40) for _ in range(self.n_classes)]
+        counts = list(counts_dict.values())
+        self.colors = list(colors_dict.values())
         self.T +=1
 
         # Append counts for this frame to the list of frame counts
@@ -61,7 +62,7 @@ class Process:
             counts = [frame_counts[i] for frame_counts in self.frame_counts] # Get counts for object class i for all frames
             bp = self.ax.bar(np.arange(len(self.bar_index)) + (i * self.bar_width), 
                               counts, self.bar_width, alpha=BAR_OPACITY, 
-                              color=colors[i], label=classes[i], linewidth=1)
+                              color=self.colors[i], label=classes[i], linewidth=1)
             self.bar_plots.append(bp)
 
 
@@ -69,5 +70,17 @@ class Process:
 
         # self.ax.set_xticklabels([str(i) for i in range(len(self.bar_index))])
         self.ax.set_xticklabels([str(i) for i in range(self.T)[-self.n_classes:]])
-        self.ax.legend()
+
+        # self.ax.legend()
+        # self.ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
         self.canvas.draw()
+
+    def reset_bar_chart(self):
+        # self.frame_counts = [] # List of lists to store counts for each object class for each frame
+        # self.bar_plots = []
+        # self.bar_index = []
+        # self.T = 0
+        # self.ax.clear()
+        # create_figure_bar(self.fig, self.ax)
+        pass
