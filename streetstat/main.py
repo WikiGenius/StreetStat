@@ -59,11 +59,14 @@ class StreetStat(StyleApp):
             self.start = True
             text = self.screen.analyse_button.text.replace("ANALYZE", "STOP")
             self.screen.analyse_button.text = text
+            self.screen.box_plot.opacity = 1
             
         else:
             self.start = False
             text = self.screen.analyse_button.text.replace("STOP", "ANALYZE")
             self.screen.analyse_button.text = text
+            self.screen.box_plot.opacity = 0.1
+
             self.stop_analyse()
     def save_button(self):
         pass
@@ -76,9 +79,8 @@ class StreetStat(StyleApp):
         
         self.fig.subplots_adjust(bottom=0.2, left=0.15)
 
-
-
         self.canvas = FigureCanvasKivyAgg(self.fig)
+        
         box_plot.add_widget(self.canvas)
         
     def process_after_video(self):

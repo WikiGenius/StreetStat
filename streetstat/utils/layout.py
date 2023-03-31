@@ -44,8 +44,8 @@ class MainScreen(Screen):
 
     
 def create_figure_bar(fig, ax):
-    ax.set_xlabel('Frame Number')
+    ax.set_xlabel('Time (S)')
     ax.set_ylabel('Count')
-    ax.set_title('Object Count per Frame')
+    ax.set_title('Object Count per Sec')
     # ax.legend()
     return fig, ax

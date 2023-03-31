@@ -19,10 +19,11 @@ class Process:
         self.ax = ax
         self.n_classes = len(classes)
         self.bar_width = 0.9 / self.n_classes
-        self.max_frames = 5 # Maximum number of frames to keep track of
+        self.max_frames = MAX_FRAMES # Maximum number of frames to keep track of
         self.frame_counts = [] # List of lists to store counts for each object class for each frame
         self.bar_plots = []
         self.bar_index = []
+        self.T = 0
 
     def detect_traffic(self, frame):
         conf_thres = self.screen.conf_thres.value / 100
@@ -33,6 +34,7 @@ class Process:
 
         # Generate random counts for each object class for this frame
         counts = [random.randint(1, 40) for _ in range(self.n_classes)]
+        self.T +=1
 
         # Append counts for this frame to the list of frame counts
         self.frame_counts.append(counts)
@@ -46,7 +48,6 @@ class Process:
         if len(self.bar_index) > self.max_frames:
             self.bar_index.pop(0)
         self.update_bar()
-        plt.bar
         return frame_vis
 
     def update_bar(self):
@@ -59,13 +60,14 @@ class Process:
         for i in range(self.n_classes):
             counts = [frame_counts[i] for frame_counts in self.frame_counts] # Get counts for object class i for all frames
             bp = self.ax.bar(np.arange(len(self.bar_index)) + (i * self.bar_width), 
-                              counts, self.bar_width, alpha=bar_opacity, 
+                              counts, self.bar_width, alpha=BAR_OPACITY, 
                               color=colors[i], label=classes[i], linewidth=1)
             self.bar_plots.append(bp)
 
 
         self.ax.set_xticks(np.arange(len(self.bar_index)) + ((self.n_classes - 1) * self.bar_width / 2))
 
-        self.ax.set_xticklabels([str(i) for i in range(len(self.bar_index))])
+        # self.ax.set_xticklabels([str(i) for i in range(len(self.bar_index))])
+        self.ax.set_xticklabels([str(i) for i in range(self.T)[-self.n_classes:]])
         self.ax.legend()
         self.canvas.draw()
