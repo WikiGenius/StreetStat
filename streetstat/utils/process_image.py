@@ -32,9 +32,9 @@ class Process:
         self.get_classes()
 
         dets, frame_info = detector.detect(frame, conf_thres=conf_thres, iou_thres=iou_thres)
-        frame_vis, counts_dict, colors_dict = utils.draw_traffic(frame, dets, visualize=self.visualize, filter_classes=self.classes)
+        frame_vis, self.counts_dict, colors_dict = utils.draw_traffic(frame, dets, visualize=self.visualize, filter_classes=self.classes)
         
-        counts = list(counts_dict.values())
+        counts = list(self.counts_dict.values())
         self.colors = list(colors_dict.values())
         self.T +=1
 
@@ -54,7 +54,7 @@ class Process:
         except Exception as e:
             print(f"Exception: {e}")
             self.reset_bar_chart()
-        return frame_vis
+        return frame_vis, self.counts_dict, self.T
 
     def update_bar(self):
         # Update bar chart with new data

@@ -16,12 +16,7 @@ import random
 if platform !='android':
     Window.size = (400, 800)
     
-
-class Matty(FloatLayout):
-	def __init__(self, **kwargs):
-		super().__init__(**kwargs)
-
-
+      
 class StreetStat(StyleApp):
     if DEBUG:
         DEBUG = DEBUG  
@@ -31,7 +26,8 @@ class StreetStat(StyleApp):
         
         # Load YOLOv8n model for object detection
         self.pattern = re.compile(r'\d+')
-        
+        self.counts_dict = {}
+        self.T = 0
   
     def on_start(self): 
         
@@ -47,8 +43,8 @@ class StreetStat(StyleApp):
         self.process.visualize = self.screen.vis.active
 
         process_time = time.time()
-        frame_vis = self.process.detect_traffic(frame.copy())
-        
+        frame_vis, self.counts_dict, self.T = self.process.detect_traffic(frame.copy())
+
         process_time = time.time() - process_time
         self.fps = 1 / process_time
         return frame_vis
@@ -69,6 +65,10 @@ class StreetStat(StyleApp):
 
             self.stop_analyse()
     def save_button(self):
+        if len(self.counts_dict.values()) == 0:
+            print('empty')
+        else:
+            print(self.counts_dict)
         pass
  
 
@@ -88,6 +88,8 @@ class StreetStat(StyleApp):
 
     def stop_analyse(self):
         self.process.reset_bar_chart()
+        self.T = 0
+        self.counts_dict = {}
         self.fps = 33
     
 if __name__ == '__main__':
