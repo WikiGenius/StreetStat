@@ -70,7 +70,7 @@ class Process:
 
         self.ax.set_xticks(np.arange(len(self.bar_index)) + ((self.n_classes - 1) * self.bar_width / 2))
 
-        # self.ax.set_xticklabels([str(i) for i in range(self.T)[-self.n_classes:]])
+        self.ax.set_xticklabels([str(i) for i in range(self.T)[-MAX_FRAMES:]])
 
         # self.ax.legend()
         # self.ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))

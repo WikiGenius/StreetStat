@@ -10,8 +10,6 @@ detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
 
 DEBUG=True
 
-# classes = ['PERSON', 'CAR', 'MOTORCYCLE', 'BUS', 'TRUCK']
-# colors = ["#F63D54", "#027FFF", "#8876FE", "#0D1386", "#3C44C3"]
 
 BAR_OPACITY = 0.8
 MAX_FRAMES = 5
