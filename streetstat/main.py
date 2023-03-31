@@ -68,22 +68,6 @@ class StreetStat(StyleApp):
     def save_button(self):
         pass
  
- 
-    # def create_init_bar(self, size_bar = 6):
-    #     box_plot = self.screen.box_plot
-    #     self.size_bar = size_bar
-    #     fig, ax = plt.subplots()
-    #     # fig.set_size_inches(8, 6)
-        
-    #     # Adjust the padding of the plot
-    #     fig.subplots_adjust(bottom=0.2)
-    #     self.fig, self.ax = create_figure_bar(fig, ax)
-        
-    #     self.canvas = FigureCanvasKivyAgg(self.fig)
-    #     box_plot.add_widget(self.canvas)
-    #     x = np.arange(size_bar)
-    #     y = np.random.randint(1, 10, size=size_bar)
-    #     self.ax.bar(x, y)
 
     def create_init_bar(self):
         box_plot = self.screen.box_plot
