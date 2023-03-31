@@ -78,7 +78,7 @@ class StyleApp(MDApp):
         filters = [ ]  # add more video file extensions here
         path = './assets/videos/*'
         filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
-
+        self.process_after_video()
     def handle_selection(self, selection):
         '''
         Callback function for handling the selection response from Activity.

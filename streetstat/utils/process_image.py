@@ -49,7 +49,11 @@ class Process:
         self.bar_index.append(len(self.bar_index))
         if len(self.bar_index) > self.max_frames:
             self.bar_index.pop(0)
-        self.update_bar()
+        try:
+            self.update_bar()
+        except Exception as e:
+            print(f"Exception: {e}")
+            self.reset_bar_chart()
         return frame_vis
 
     def update_bar(self):
@@ -62,12 +66,11 @@ class Process:
         # Iterate over each object class and each frame
         for i in range(self.n_classes):
             counts = [frame_counts[i] for frame_counts in self.frame_counts] # Get counts for object class i for all frames
+            
             bp = self.ax.bar(np.arange(len(self.bar_index)) + (i * self.bar_width), 
                               counts, self.bar_width, alpha=BAR_OPACITY, 
                               color=self.colors[i], label=self.classes[i], linewidth=1)
             self.bar_plots.append(bp)
-
-
         self.ax.set_xticks(np.arange(len(self.bar_index)) + ((self.n_classes - 1) * self.bar_width / 2))
 
         self.ax.set_xticklabels([str(i) for i in range(self.T)[-MAX_FRAMES:]])
@@ -78,12 +81,12 @@ class Process:
         self.canvas.draw()
 
     def reset_bar_chart(self):
-        # self.frame_counts = [] # List of lists to store counts for each object class for each frame
-        # self.bar_plots = []
-        # self.bar_index = []
-        # self.T = 0
-        # self.ax.clear()
-        # create_figure_bar(self.fig, self.ax)
+        self.frame_counts = [] # List of lists to store counts for each object class for each frame
+        self.bar_plots = []
+        self.bar_index = []
+        self.T = 0
+        self.ax.clear()
+        create_figure_bar(self.fig, self.ax)
         pass
 
     def get_classes(self):
