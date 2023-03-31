@@ -77,7 +77,7 @@ class StreetStat(StyleApp):
         self.fig, self.ax = plt.subplots(figsize=(6, 4))
         create_figure_bar(self.fig, self.ax)
         
-        self.fig.subplots_adjust(bottom=0.2, left=0.15)
+        self.fig.subplots_adjust(bottom=0.2, left=0.17)
 
         self.canvas = FigureCanvasKivyAgg(self.fig)
         
