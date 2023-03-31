@@ -17,6 +17,10 @@ from kivy.clock import Clock
 from kivy.graphics.texture import Texture
 from utils import resize, create_rounded_img
 from plyer import filechooser
+import random
+import numpy as np
+
+
 if DEBUG:
     from kivymd.tools.hotreload.app import MDApp
 else:
@@ -40,7 +44,8 @@ class MainScreen(Screen):
 
     
 def create_figure_bar(fig, ax):
-    ax.set_xlabel('FRAME')
-    ax.set_ylabel('COUNT')
-
+    # ax.set_xlabel('FRAME')
+    # ax.set_ylabel('COUNT')
+    ax.set_title("COUNT EACH CLASS")
+    # ax.legend()
     return fig, ax
