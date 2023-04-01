@@ -8,9 +8,9 @@ from ultralytics import YOLO
 import numpy as np
 detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
 
-DEBUG=False
+DEBUG=True
 
 
 BAR_OPACITY = 0.8
-MAX_FRAMES = 5
-SKIP_FRAMES = 1
+MAX_FRAMES = 6
+SKIP_FRAMES = 5

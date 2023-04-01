@@ -39,6 +39,7 @@ class StreetStat(StyleApp):
         self.process.visualize = self.screen.vis.active
 
         process_time = time.time()
+        
         frame_vis, self.counts_dict, self.T, self.frame_counts = self.process.detect_traffic(frame.copy())
 
         process_time = time.time() - process_time

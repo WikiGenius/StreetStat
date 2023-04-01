@@ -22,11 +22,16 @@ class Process:
  
         self.max_frames = MAX_FRAMES # Maximum number of frames to keep track of
         self.frame_counts = [] # List of lists to store counts for each object class for each frame
+        self.counts_dict = dict()
         self.bar_plots = []
         self.bar_index = []
         self.T = 0
 
     def detect_traffic(self, frame):
+        if self.T % SKIP_FRAMES != 0:
+            self.T +=1
+            return frame, self.counts_dict, self.T, self.frame_counts
+        
         conf_thres = self.screen.conf_thres.value / 100
         iou_thres = self.screen.iou_thres.value / 100
         self.get_classes()
@@ -36,7 +41,6 @@ class Process:
         
         counts = list(self.counts_dict.values())
         self.colors = list(colors_dict.values())
-        self.T +=1
 
         # Append counts for this frame to the list of frame counts
         self.frame_counts.append(counts)
@@ -49,11 +53,15 @@ class Process:
         self.bar_index.append(len(self.bar_index))
         if len(self.bar_index) > self.max_frames:
             self.bar_index.pop(0)
+        self.T +=1
+
+    
         try:
             self.update_bar()
         except Exception as e:
             print(f"Exception: {e}")
             self.reset_bar_chart()
+            
         return frame_vis, self.counts_dict, self.T, self.frame_counts
 
     def update_bar(self):
@@ -62,7 +70,8 @@ class Process:
         self.bar_plots = []
 
         create_figure_bar(self.fig, self.ax)
-
+        labels = [str(i) for i in range(0, self.T, SKIP_FRAMES)[-MAX_FRAMES:]]
+        print(f"labels: {labels}")
         # Iterate over each object class and each frame
         for i in range(self.n_classes):
             counts = [frame_counts[i] for frame_counts in self.frame_counts] # Get counts for object class i for all frames
@@ -71,9 +80,16 @@ class Process:
                               counts, self.bar_width, alpha=BAR_OPACITY, 
                               color=self.colors[i], label=self.classes[i], linewidth=1)
             self.bar_plots.append(bp)
-        self.ax.set_xticks(np.arange(len(self.bar_index)) + ((self.n_classes - 1) * self.bar_width / 2))
+            
+        print(f"counts: {counts}")
+        print(f"self.bar_plots: {self.bar_plots}")
+        
+        x_ticks = np.arange(len(self.bar_index)) + ((self.n_classes - 1) * self.bar_width / 2)
+        print(f"x_ticks: {x_ticks}")
+        
+        self.ax.set_xticks(x_ticks)
 
-        self.ax.set_xticklabels([str(i) for i in range(self.T)[-MAX_FRAMES:]])
+        self.ax.set_xticklabels(labels)
 
         # self.ax.legend()
         # self.ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
