@@ -8,7 +8,7 @@ from ultralytics import YOLO
 import numpy as np
 detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
 
-DEBUG=True
+DEBUG=False
 
 
 BAR_OPACITY = 0.8

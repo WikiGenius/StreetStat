@@ -71,7 +71,6 @@ class Process:
 
         create_figure_bar(self.fig, self.ax)
         labels = [str(i) for i in range(0, self.T, SKIP_FRAMES)[-MAX_FRAMES:]]
-        print(f"labels: {labels}")
         # Iterate over each object class and each frame
         for i in range(self.n_classes):
             counts = [frame_counts[i] for frame_counts in self.frame_counts] # Get counts for object class i for all frames
@@ -81,11 +80,8 @@ class Process:
                               color=self.colors[i], label=self.classes[i], linewidth=1)
             self.bar_plots.append(bp)
             
-        print(f"counts: {counts}")
-        print(f"self.bar_plots: {self.bar_plots}")
         
         x_ticks = np.arange(len(self.bar_index)) + ((self.n_classes - 1) * self.bar_width / 2)
-        print(f"x_ticks: {x_ticks}")
         
         self.ax.set_xticks(x_ticks)
 
