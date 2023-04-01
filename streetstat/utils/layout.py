@@ -19,6 +19,7 @@ from utils import resize, create_rounded_img
 from plyer import filechooser
 import random
 import numpy as np
+from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 
 if DEBUG:

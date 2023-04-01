@@ -54,7 +54,7 @@ class Process:
         except Exception as e:
             print(f"Exception: {e}")
             self.reset_bar_chart()
-        return frame_vis, self.counts_dict, self.T
+        return frame_vis, self.counts_dict, self.T, self.frame_counts
 
     def update_bar(self):
         # Update bar chart with new data

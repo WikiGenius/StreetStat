@@ -3,15 +3,11 @@
 # GitHub: https://github.com/WikiGenius
 
 from utils.layout import *
-from utils import StyleApp
+from utils import StyleApp, generate_xlsx
 import utils
 import re
 import time
-from kivy.core import window
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 import matplotlib.pyplot as plt
-import numpy as np
-import random
 
 if platform !='android':
     Window.size = (400, 800)
@@ -28,7 +24,7 @@ class StreetStat(StyleApp):
         self.pattern = re.compile(r'\d+')
         self.counts_dict = {}
         self.T = 0
-  
+        self.frame_counts  = []
     def on_start(self): 
         
         # Create initial bar chart
@@ -43,7 +39,7 @@ class StreetStat(StyleApp):
         self.process.visualize = self.screen.vis.active
 
         process_time = time.time()
-        frame_vis, self.counts_dict, self.T = self.process.detect_traffic(frame.copy())
+        frame_vis, self.counts_dict, self.T, self.frame_counts = self.process.detect_traffic(frame.copy())
 
         process_time = time.time() - process_time
         self.fps = 1 / process_time
@@ -68,7 +64,7 @@ class StreetStat(StyleApp):
         if len(self.counts_dict.values()) == 0:
             print('empty')
         else:
-            print(self.counts_dict)
+            generate_xlsx(self.frame_counts, self.counts_dict, self.T, skip_frames=SKIP_FRAMES)
         pass
  
 
