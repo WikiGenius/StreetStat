@@ -4,6 +4,7 @@ tests
 .buildozer
 .vscode
 .venv
+.android_venv
 poetry.lock
 designs
 CrowdScope.spec
