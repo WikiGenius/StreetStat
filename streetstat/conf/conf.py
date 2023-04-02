@@ -19,13 +19,14 @@ else:
     from utils import Detector
     THREAD = False
     # model_path = '../assets/weights/yolov6n_model.tflite'
-    model_path = '../assets/weights/yolov8n_float16.tflite'
+    model_tflite_path = '../assets/weights/yolov8n_float16.tflite'
+    YOLOV8 = 'v8' in model_tflite_path
 
-    print(f"Is the model existed: {os.path.isfile(model_path)}")
+    print(f"Is the model existed: {os.path.isfile(model_tflite_path)}")
     if THREAD:
-        detector = Detector(model_path).start()
+        detector = Detector(model_tflite_path).start()
     else:
-        detector = Detector(model_path)
+        detector = Detector(model_tflite_path)
     
 ###########################<GLOBAL SETTINGS>###############################
     

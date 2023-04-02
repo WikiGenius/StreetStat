@@ -10,9 +10,9 @@ def bgr_to_hex(bgr):
     return "#{:02x}{:02x}{:02x}".format(r, g, b)
 
 # import platform
-if platform != "android":
+if not PLATFORM_ANDROID:
     from asone.utils.draw import *
-    def draw_traffic(img, dets, visualize = True, identities=None, draw_trails=False, offset=(0, 0), class_names=None, filter_classes=None):
+    def draw_traffic(img, frame_info, dets, visualize = True, identities=None, draw_trails=False, offset=(0, 0), class_names=None, filter_classes=None):
         counts_dict = {cls.lower(): 0 for cls in filter_classes}
         colors_dict = {cls.lower(): None for cls in filter_classes}
         if dets is not None: 
@@ -79,8 +79,10 @@ else:
     palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
     data_deque = {}
     # def draw_traffic(img, dets, visualize = True, identities=None, draw_trails=False, offset=(0, 0), class_names=None, filter_classes=None, yolo_v8=True)
-    def draw_traffic(img, ratio, dwdh, output_data, visualize = True, conf_thres=0.25, filter_classes=None, yolo_v8=True):
-        if yolo_v8:
+    def draw_traffic(img, frame_info, dets, visualize = True, conf_thres=0.25, filter_classes=None):
+        ratio, dwdh = frame_info
+        output_data = dets
+        if YOLOV8:
             img, counts_dict, colors_dict = draw_boxes_v8(img, ratio, dwdh, output_data, conf_thres, filter_classes, visualize)
         else:
             img, counts_dict, colors_dict = draw_boxes_vn(img, ratio, dwdh, output_data, conf_thres, filter_classes, visualize)
