@@ -8,8 +8,7 @@ from utils.render import create_rounded_img
 from utils.style_app import StyleApp
 from utils.process_image import Process
 from utils.generate_report import generate_xlsx
-from utils.detector import Detector
-from utils.model import get_model
+
 
 import random
 random.seed(0)
