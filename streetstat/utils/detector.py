@@ -3,7 +3,7 @@
 # GitHub: https://github.com/WikiGenius
 
 from threading import Thread
-from utils import get_model, preprocess
+import utils
 import time
 from conf import *
 import numpy as np
@@ -11,7 +11,7 @@ import numpy as np
 class Detector:
     def __init__(self, model_tflite_path, use_cuda=False):        
         self.use_cuda = use_cuda
-        self.interpreter, self.input_details, self.output_details = get_model(
+        self.interpreter, self.input_details, self.output_details = utils.get_model(
             model_tflite_path)
         if YOLOV8:
             self.input_shape = self.input_details[0]['shape'][1:3]
@@ -45,7 +45,7 @@ class Detector:
         transpose=False
         if not YOLOV8:
             transpose = True
-        im, self.ratio, self.dwdh = preprocess(self.img, self.input_shape, transpose)
+        im, self.ratio, self.dwdh = utils.preprocess(self.img, self.input_shape, transpose)
         
         # predict the model
         input = self.input_details[0]

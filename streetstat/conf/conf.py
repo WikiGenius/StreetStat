@@ -30,7 +30,7 @@ else:
     
 ###########################<GLOBAL SETTINGS>###############################
     
-DEBUG=False
+DEBUG=True
 BAR_OPACITY = 0.8
 MAX_FRAMES = 6
 SKIP_FRAMES = 5
