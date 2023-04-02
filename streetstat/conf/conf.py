@@ -7,16 +7,16 @@ from kivy import platform
 
 ###########################<PLATFORM SETTINGS>###############################
 
-if platform == "android":
-    PLATFORM_ANDROID = True
-else:
-    PLATFORM_ANDROID = False
-    
+# if platform == "android":
+#     PLATFORM_ANDROID = True
+# else:
+#     PLATFORM_ANDROID = False
+PLATFORM_ANDROID = True    
 if not PLATFORM_ANDROID:
     import asone
     detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
 else:
-    from utils import Detector
+    from model_tflite import Detector
     THREAD = False
     # model_path = '../assets/weights/yolov6n_model.tflite'
     model_tflite_path = '../assets/weights/yolov8n_float16.tflite'

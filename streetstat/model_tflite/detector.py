@@ -3,15 +3,16 @@
 # GitHub: https://github.com/WikiGenius
 
 from threading import Thread
+import model_tflite
 import utils
 import time
-from conf import *
+from conf import YOLOV8
 import numpy as np
 
 class Detector:
     def __init__(self, model_tflite_path, use_cuda=False):        
         self.use_cuda = use_cuda
-        self.interpreter, self.input_details, self.output_details = utils.get_model(
+        self.interpreter, self.input_details, self.output_details = model_tflite.get_model(
             model_tflite_path)
         if YOLOV8:
             self.input_shape = self.input_details[0]['shape'][1:3]
