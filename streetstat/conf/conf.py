@@ -12,24 +12,16 @@ from kivy import platform
 # else:
 #     PLATFORM_ANDROID = False
 PLATFORM_ANDROID = True    
-if not PLATFORM_ANDROID:
-    import asone
-    detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
-else:
-    from model_tflite import Detector
-    THREAD = False
-    # model_path = '../assets/weights/yolov6n_model.tflite'
-    model_tflite_path = '../assets/weights/yolov8n_float16.tflite'
+if PLATFORM_ANDROID:
+    # model_tflite_path = './assets/weights/yolov6n_model.tflite'
+    model_tflite_path = './assets/weights/yolov8n_float16.tflite'
     YOLOV8 = 'v8' in model_tflite_path
 
     print(f"Is the model existed: {os.path.isfile(model_tflite_path)}")
-    if THREAD:
-        detector = Detector(model_tflite_path).start()
-    else:
-        detector = Detector(model_tflite_path)
+
     
 ###########################<GLOBAL SETTINGS>###############################
-    
+THREAD = False
 DEBUG=True
 BAR_OPACITY = 0.8
 MAX_FRAMES = 6

@@ -2,11 +2,11 @@
 # Date: 03/02/2023
 # GitHub: https://github.com/WikiGenius
 
+from conf import YOLOV8
 from threading import Thread
 import model_tflite
 import utils
 import time
-from conf import YOLOV8
 import numpy as np
 
 class Detector:

@@ -23,7 +23,16 @@ class Process:
         self.bar_plots = []
         self.bar_index = []
         self.T = 0
-
+        if not PLATFORM_ANDROID:
+            import asone
+            self.detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
+        else:
+            from model_tflite import Detector
+            if THREAD:
+                self.detector = Detector(model_tflite_path).start()
+            else:
+                self.detector = Detector(model_tflite_path)
+                
     def detect_traffic(self, frame):
         if self.T % SKIP_FRAMES != 0:
             self.T +=1
