@@ -80,7 +80,6 @@ else:
     palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
     data_deque = {}
     def draw_traffic(img, frame_info, dets, visualize = True, filter_classes=None, conf_thres=0.25, identities=None, draw_trails=False, offset=(0, 0), class_names=None):
-         
         ratio, dwdh = frame_info
         output_data = dets
         if YOLOV8:
@@ -110,11 +109,10 @@ else:
             cls_id = int(cls_id)
             name = utils.NAMES[cls_id]
             score = round(float(score),3)
+            if filter_classes and name in  counts_dict.keys() and score > conf_thres:
 
-            if filter_classes and name in filter_classes and score > conf_thres:
                 counts_dict[name] += 1
-                if not colors_dict[name]:
-                    colors_dict[name] = bgr_to_hex(color)
+
                     
                 box = np.array([x0,y0,x1,y1])
                 box -= np.array(dwdh*2)
@@ -123,9 +121,11 @@ else:
 
                 #Creating random colors for bounding box visualization.
                 color = compute_color_for_labels(cls_id)
+                if not colors_dict[name]:
+                    colors_dict[name] = bgr_to_hex(color)
+                
                 name = f"{name}  {score}"
-
-
+                    
                 if visualize:
                     draw_ui_box(box, img, label=name, color=color, line_thickness=2)    
         return img, counts_dict, colors_dict
@@ -141,10 +141,9 @@ else:
             name = utils.NAMES[cls_id]
             score = round(float(score),2)
 
-            if filter_classes and name in filter_classes and score > conf_thres:
+            if filter_classes and name in  counts_dict.keys() and score > conf_thres:
                 counts_dict[name] += 1
-                if not colors_dict[name]:
-                    colors_dict[name] = bgr_to_hex(color)
+
                     
                 box = np.array([x0,y0,x1,y1])
                 box -= np.array(dwdh*2)
@@ -153,6 +152,8 @@ else:
 
                 #Creating random colors for bounding box visualization.
                 color = compute_color_for_labels(cls_id)
+                if not colors_dict[name]:
+                    colors_dict[name] = bgr_to_hex(color)
                 name = f"{name}  {score}"
                 if visualize:
                     draw_ui_box(box, img, label=name, color=color, line_thickness=2)    

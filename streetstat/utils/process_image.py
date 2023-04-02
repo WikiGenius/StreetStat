@@ -41,7 +41,7 @@ class Process:
         conf_thres = self.screen.conf_thres.value / 100
         iou_thres = self.screen.iou_thres.value / 100
         self.get_classes()
-        dets, frame_info = detector.detect(frame, conf_thres=conf_thres, iou_thres=iou_thres)
+        dets, frame_info = self.detector.detect(frame, conf_thres=conf_thres, iou_thres=iou_thres)
         frame_vis, self.counts_dict, colors_dict = utils.draw_traffic(frame, frame_info, dets, visualize=self.visualize, filter_classes=self.classes, conf_thres = conf_thres)
         
         counts = list(self.counts_dict.values())
