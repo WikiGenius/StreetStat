@@ -53,6 +53,8 @@ if not PLATFORM_ANDROID:
                 counts_dict[label] += 1
                 if not colors_dict[label]:
                     colors_dict[label] = bgr_to_hex(color)
+                score = round(float(scores[i]),3)
+                label = f"{label}  {score}"
 
                 if visualize:
                     draw_ui_box(box, img, label=label, color=color, line_thickness=2)
