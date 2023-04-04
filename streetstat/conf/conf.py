@@ -7,11 +7,11 @@ from kivy import platform
 
 ###########################<PLATFORM SETTINGS>###############################
 
-# if platform == "android":
-#     PLATFORM_ANDROID = True
-# else:
-#     PLATFORM_ANDROID = False
-PLATFORM_ANDROID = True    
+if platform == "android":
+    PLATFORM_ANDROID = True
+else:
+    PLATFORM_ANDROID = False
+    
 if PLATFORM_ANDROID:
     # model_tflite_path = './assets/weights/yolov6n_model.tflite'
     model_tflite_path = './assets/weights/yolov8n_float16.tflite'

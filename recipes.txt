@@ -1,0 +1,307 @@
+Pillow       8.4.0   
+    depends: ['png', 'freetype', 'python3', 'jpeg', 'setuptools']
+    optional depends: ['libwebp']
+aiohttp      3.8.3   
+    depends: ['setuptools', 'python3']
+android      None    
+    depends: [('sdl2', 'genericndkbuild'), 'python3', 'pyjnius']
+apsw         3.15.0-r1
+    depends: ['setuptools', 'python3', 'sqlite3']
+argon2-cffi  20.1.0  
+    depends: ['setuptools', 'cffi', 'python3']
+atom         0.3.10  
+    depends: ['setuptools', 'python3']
+audiostream  69f6b100f1ea4e3982a1acf6bbb0804e31a2cd50
+    depends: ['python3', 'sdl2', 'pyjnius']
+babel        2.2.0   
+    depends: ['setuptools', 'python3', 'pytz']
+bcrypt       3.1.7   
+    depends: ['cffi', 'openssl', 'python3']
+boost        1.69.0  
+    depends: ['python3']
+This is a broken recipe, not a real one!
+brokenrecipe None    
+    depends: []
+cffi         1.13.2  
+    depends: ['setuptools', 'python3', 'pycparser', 'libffi']
+coverage     4.1     
+    depends: ['setuptools', 'python3', 'hostpython3']
+cppy         1.1.0   
+    depends: ['setuptools', 'python3']
+cryptography 2.8     
+    depends: ['python3', 'six', 'setuptools', 'cffi', 'openssl']
+cymunk       master  
+    depends: ['python3']
+cython       0.29.28 
+    depends: ['setuptools', 'python3']
+dateutil     2.6.0   
+    depends: ['setuptools', 'python3']
+decorator    4.2.1   
+    depends: ['setuptools', 'python3']
+enaml        0.9.8   
+    depends: ['setuptools', 'kiwisolver', 'python3', 'atom']
+ethash       None    
+    depends: ['setuptools', 'python3']
+evdev        v0.4.7  
+    depends: ['python3']
+feedparser   5.2.1   
+    depends: ['setuptools', 'python3']
+ffmpeg       n4.3.1  
+    depends: ['sdl2']
+ffpyplayer   v4.3.2  
+    depends: ['python3', 'sdl2', 'ffmpeg']
+    optional depends: ['openssl', 'ffpyplayer_codecs']
+ffpyplayer_codecs None    
+    depends: ['libx264', 'libshine', 'libvpx']
+flask        2.0.3   
+    depends: ['setuptools', 'python3']
+fontconfig   really_old
+    depends: ['sdl2']
+freetype     2.10.1  
+    depends: []
+freetype-py  2.2.0   
+    depends: ['python3', 'freetype']
+genericndkbuild None    
+    depends: ['python3']
+    conflicts: ['sdl2']
+gevent       1.4.0   
+    depends: ['setuptools', 'python3', 'librt']
+greenlet     0.4.15  
+    depends: ['setuptools', 'python3']
+groestlcoin_hash 1.0.3   
+    depends: ['setuptools', 'python3']
+harfbuzz     2.6.4   
+    depends: []
+    optional depends: ['freetype']
+hostpython3  3.9.9   
+    depends: []
+icu4c        57.1    
+    depends: ['hostpython3']
+ifaddr       0.1.7   
+    depends: ['setuptools', 'python3', 'ifaddrs', 'ipaddress;python_version<"3.3"']
+ifaddrs      8f9a87c 
+    depends: ['python3', 'hostpython3']
+jedi         v0.9.0  
+    depends: ['python3']
+jpeg         2.0.1   
+    depends: []
+kivy         2.1.0   
+    depends: ['pyjnius', 'python3', 'setuptools', 'sdl2']
+kivy3        master  
+    depends: ['python3', 'kivy']
+kiwisolver   1.3.2   
+    depends: ['python3', 'cppy']
+lapack       v3.10.1 
+    depends: []
+leveldb      1.22    
+    depends: ['snappy']
+libbz2       1.0.8   
+    depends: []
+libcurl      7.55.1  
+    depends: ['openssl']
+libexpat     master  
+    depends: []
+libffi       v3.4.2  
+    depends: []
+libgeos      3.7.1   
+    depends: []
+libglob      0.0.1   
+    depends: ['hostpython3']
+libiconv     1.16    
+    depends: []
+liblzma      5.2.4   
+    depends: []
+libmysqlclient master  
+    depends: []
+libogg       1.3.3   
+    depends: []
+libpcre      8.44    
+    depends: []
+libpq        10.12   
+    depends: []
+librt        None    
+    depends: []
+libsecp256k1 None    
+    depends: []
+libshine     c72aba9031bde18a0995e7c01c9b53f2e08a0e46
+    depends: []
+libsodium    1.0.16  
+    depends: []
+libtorrent   1_2_1   
+    depends: ['boost']
+    optional depends: ['openssl']
+libtribler   devel   
+    depends: ['libtorrent', 'twisted', 'python3', 'netifaces', 'pyleveldb', 'apsw', 'm2crypto', 'pycrypto', 'pil', 'libsodium', 'ffmpeg', 'openssl', 'cryptography']
+    conflicts: ['python3']
+libvorbis    1.3.6   
+    depends: []
+    optional depends: ['libogg']
+libvpx       1.11.0  
+    depends: []
+libwebp      1.1.0   
+    depends: []
+libx264      5db6aa6cab1b146e07b60cc1736a01f21da01154
+    depends: []
+libxml2      2.9.12  
+    depends: []
+libxslt      1.1.34  
+    depends: ['libxml2']
+libzbar      0.10    
+    depends: ['libiconv']
+libzmq       4.3.2   
+    depends: []
+lxml         4.8.0   
+    depends: ['python3', 'libxml2', 'librt', 'setuptools', 'libxslt']
+m2crypto     0.30.1  
+    depends: ['setuptools', 'python3', 'openssl']
+matplotlib   3.5.2   
+    depends: ['python3', 'freetype', 'kiwisolver', 'numpy', 'setuptools', 'pillow']
+msgpack-python 0.4.7   
+    depends: ['setuptools', 'python3']
+mysqldb      1.2.5   
+    depends: ['setuptools', 'python3', 'libmysqlclient']
+netifaces    0.10.9  
+    depends: ['setuptools', 'python3']
+numpy        1.22.3  
+    depends: ['setuptools', 'python3', 'cython']
+omemo        0.11.0  
+    depends: ['setuptools', 'python3', 'x3dh', 'cryptography']
+omemo-backend-signal 0.2.5   
+    depends: ['python3', 'x3dh', 'setuptools', 'DoubleRatchet', 'cryptography', 'protobuf_cpp', 'omemo', 'hkdf==0.0.3']
+openal       1.21.1  
+    depends: []
+opencv       4.5.1   
+    depends: ['numpy']
+opencv_extras 4.5.1   
+    depends: ['opencv']
+openssl      1.1     
+    depends: []
+pandas       1.0.3   
+    depends: ['python3', 'liblzma', 'numpy', 'cython', 'pytz', 'libbz2']
+Pillow       8.4.0   
+    depends: ['png', 'jpeg', 'freetype', 'setuptools', 'python3']
+    conflicts: ['pillow']
+    optional depends: ['libwebp']
+png          1.6.37  
+    depends: []
+preppy       27b7085 
+    depends: ['python3']
+protobuf_cpp 3.6.1   
+    depends: ['setuptools', 'cffi', 'python3']
+psycopg2     2.8.5   
+    depends: ['setuptools', 'python3', 'libpq']
+py3dns       3.2.1   
+    depends: ['setuptools', 'python3']
+pyaml        15.8.2  
+    depends: ['setuptools', 'python3']
+pybind11     2.9.0   
+    depends: ['setuptools', 'python3']
+pycparser    2.14    
+    depends: ['setuptools', 'python3']
+pycrypto     2.7a1   
+    depends: ['openssl', 'python3']
+pycryptodome 3.6.3   
+    depends: ['setuptools', 'cffi', 'python3']
+pydantic     1.10.4  
+    depends: ['setuptools', 'python3']
+pygame       2.1.0   
+    depends: ['png', 'python3', 'sdl2_image', 'sdl2_ttf', 'jpeg', 'sdl2_mixer', 'setuptools', 'sdl2']
+pyicu        1.9.2   
+    depends: ['python3', 'icu']
+pyjnius      1.4.2   
+    depends: [('genericndkbuild', 'sdl2'), 'python3', 'six']
+pyleveldb    0.194   
+    depends: ['setuptools', 'snappy', 'python3', 'leveldb']
+pymunk       6.0.0   
+    depends: ['setuptools', 'cffi', 'python3']
+pynacl       1.3.0   
+    depends: ['python3', 'six', 'hostpython3', 'setuptools', 'libsodium', 'cffi']
+pyogg        0.6.4a1 
+    depends: ['setuptools', 'libvorbis', 'libogg', 'python3']
+pyopenal     0.7.3a1 
+    depends: ['numpy', 'python3', 'setuptools', 'openal']
+pyopenssl    19.0.0  
+    depends: ['setuptools', 'python3', 'openssl']
+pyproj       1.9.6   
+    depends: ['setuptools', 'python3']
+pyrxp        2a02cecc87b9
+    depends: ['python3']
+pysdl2       0.9.6   
+    depends: ['python3', 'sdl2']
+pysha3       1.0.2   
+    depends: ['setuptools', 'python3']
+python3      3.9.9   
+    depends: ['hostpython3', 'sqlite3', 'openssl', 'libffi']
+    optional depends: ['libbz2', 'liblzma']
+pytz         2019.3  
+    depends: ['python3']
+pyusb        1.0.0b1 
+    depends: ['python3']
+pyzbar       0.1.7   
+    depends: ['setuptools', 'libzbar', 'python3']
+pyzmq        20.0.0  
+    depends: ['setuptools', 'python3', 'libzmq']
+regex        2019.06.08
+    depends: ['setuptools', 'python3']
+reportlab    fe660f227cac
+    depends: ['python3', 'freetype']
+ruamel.yaml  0.15.77 
+    depends: ['setuptools', 'python3']
+scipy        1.8.1   
+    depends: ['python3', 'setuptools', 'numpy', 'cython', 'lapack', 'pybind11']
+scrypt       0.8.20  
+    depends: ['setuptools', 'python3', 'openssl']
+sdl2         2.26.1  
+    depends: ['sdl2_image', 'sdl2_mixer', 'sdl2_ttf']
+sdl2_image   2.6.2   
+    depends: []
+sdl2_mixer   2.6.2   
+    depends: []
+sdl2_ttf     2.20.1  
+    depends: []
+secp256k1    0.13.2.4
+    depends: ['openssl', 'hostpython3', 'python3', 'setuptools', 'libffi', 'cffi', 'libsecp256k1']
+setuptools   51.3.3  
+    depends: ['python3']
+shapely      1.7a1   
+    depends: ['setuptools', 'python3', 'libgeos']
+six          1.15.0  
+    depends: ['setuptools', 'python3']
+snappy       1.1.7   
+    depends: []
+spine        0.5.1   
+    depends: ['setuptools', 'python3']
+sqlalchemy   1.3.3   
+    depends: ['setuptools', 'python3']
+sqlite3      3.35.5  
+    depends: []
+storm        0.20    
+    depends: ['python3']
+sympy        1.1.1   
+    depends: ['mpmath', 'python3']
+tflite-runtime 2.8.0   
+    depends: ['numpy', 'python3', 'pybind11']
+twisted      20.3.0  
+    depends: ['python3', 'incremental', 'setuptools', 'zope_interface', 'constantly']
+ujson        1.35    
+    depends: ['python3']
+vispy        0.4.0   
+    depends: ['numpy', 'python3', 'pysdl2']
+vlc          3.0.0   
+    depends: []
+wsaccel      0.6.2   
+    depends: ['python3']
+x3dh         0.5.3   
+    depends: ['setuptools', 'python3', 'cryptography', 'xeddsa']
+xeddsa       0.4.4   
+    depends: ['setuptools', 'cffi', 'pynacl', 'python3']
+zbar         0.10    
+    depends: ['setuptools', 'libzbar', 'python3']
+zbarlight    2.1     
+    depends: ['setuptools', 'libzbar', 'python3']
+zeroconf     0.24.5  
+    depends: ['setuptools', 'python3', 'ifaddr', 'typing;python_version<"3.5"']
+zope         4.1.3   
+    depends: ['python3']
+zope_interface 4.1.3   
+    depends: ['setuptools', 'python3']
