@@ -31,3 +31,11 @@ To use the app, follow these steps:
 
 
 
+
+## Screenshots
+
+<img src="./streetstat/assets/images/1.png" alt="Desktop screenshot" width="500">
+<img src="./streetstat/assets/images/2.png" alt="Desktop screenshot" width="500">
+<img src="./streetstat/assets/images/3.png" alt="Desktop screenshot" width="500">
+<img src="./streetstat/assets/images/4.png" alt="Desktop screenshot" width="500">
+<img src="./streetstat/assets/images/5.png" alt="Desktop screenshot" width="500">
