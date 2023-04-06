@@ -13,8 +13,8 @@ else:
     PLATFORM_ANDROID = False
     
 if PLATFORM_ANDROID:
-    # model_tflite_path = './assets/weights/yolov6n_model.tflite'
-    model_tflite_path = './assets/weights/yolov8n_float16.tflite'
+    model_tflite_path = './assets/weights/yolov6n_model.tflite'
+    # model_tflite_path = './assets/weights/yolov8n_float16.tflite'
     YOLOV8 = 'v8' in model_tflite_path
 
     print(f"Is the model existed: {os.path.isfile(model_tflite_path)}")
@@ -22,7 +22,7 @@ if PLATFORM_ANDROID:
     
 ###########################<GLOBAL SETTINGS>###############################
 THREAD = False
-DEBUG=True
+DEBUG=False
 BAR_OPACITY = 0.8
 MAX_FRAMES = 6
-SKIP_FRAMES = 1
+SKIP_FRAMES = 5

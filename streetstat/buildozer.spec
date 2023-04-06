@@ -36,14 +36,14 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, plyer,numpy, android, Pillow, opencv, tflite-runtime,pandas,matplotlib 
-
+# requirements = python3, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, plyer,numpy, android, Pillow, opencv, tflite-runtime,pandas,matplotlib,kivy_garden.xcamera, https://github.com/kivy-garden/graph/archive/master.zip
+requirements = python3, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, plyer,numpy, android, Pillow, opencv, tflite-runtime,pandas,matplotlib
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/data/presplash.png
+# presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/icon.png
+# icon.filename = %(source.dir)s/data/icon.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
