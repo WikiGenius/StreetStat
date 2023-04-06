@@ -19,3 +19,4 @@ yolov8
 yolov*
 dist/
 images_dataset
+debug*

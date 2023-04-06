@@ -13,6 +13,5 @@ if platform == "android":
     request_permissions([
         Permission.WRITE_EXTERNAL_STORAGE,
         Permission.READ_EXTERNAL_STORAGE,
-        Permission.INTERNET,
-        Permission.READ_MEDIA_VIDEO
+        Permission.MANAGE_EXTERNAL_STORAGE,
     ])

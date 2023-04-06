@@ -57,10 +57,14 @@ class StyleApp(MDApp):
         # Flip the frame vertically for display purposes
         buf = cv2.flip(frame, 0).tobytes()
         # Create a Kivy Texture from the frame
-        
-        img_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
-        img_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
+
+        if platform == 'android':
+            img_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='rgb')
+            img_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
             
+        else:
+            img_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
+            img_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')      
 
         # Update the image in SearchDashboard with the new frame
         self.screen.detection_image.texture = img_texture
@@ -75,11 +79,12 @@ class StyleApp(MDApp):
         Call plyer filechooser API to run a filechooser Activity.
         '''
         # filters = [ '*.mp4']  # add more video file extensions here
-        filters = [ ]  # add more video file extensions here
+        # filters = [ ]  # add more video file extensions here
         path = './assets/videos/*'
         print(f"{path[:-1]}: ",os.path.isdir(path[:-1]))
         print(os.listdir(path[:-1]))
-        filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
+        # filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
+        filechooser.open_file(on_selection=self.handle_selection, path=path)
         self.process_after_video()
     def handle_selection(self, selection):
         '''
