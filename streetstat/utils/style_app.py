@@ -77,6 +77,8 @@ class StyleApp(MDApp):
         # filters = [ '*.mp4']  # add more video file extensions here
         filters = [ ]  # add more video file extensions here
         path = './assets/videos/*'
+        print(f"{path[:-1]}: ",os.path.isdir(path[:-1]))
+        print(os.listdir(path[:-1]))
         filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
         self.process_after_video()
     def handle_selection(self, selection):
