@@ -5,7 +5,7 @@
 import os
 from utils.layout import *
 if platform == 'android':
-    from android_permissions import AndroidPermissions
+    from utils.android_permissions import AndroidPermissions
     from android import mActivity, autoclass, api_version
 
 
@@ -40,6 +40,7 @@ class StyleApp(MDApp):
     def on_start(self): 
         if platform == 'android':
             self.dont_gc = AndroidPermissions(self.start_app)
+        pass
     
     def start_app(self):
         self.dont_gc = None
@@ -58,6 +59,8 @@ class StyleApp(MDApp):
     def update(self, *args):
         # Read a frame from the video capture device
         ret, frame = self.capture.read()
+        print(f"ret: {ret}")
+        print(f"frame: {frame}")
         # Stop the detector if there are no more frames
         if not ret:
             # self.screen.detection_image.source = './data/upload.png'

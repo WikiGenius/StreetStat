@@ -9,7 +9,6 @@ from utils.style_app import StyleApp
 from utils.process_image import Process
 from utils.generate_report import generate_xlsx
 
-
 import random
 random.seed(0)
 
