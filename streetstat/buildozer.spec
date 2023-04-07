@@ -91,6 +91,7 @@ fullscreen = 0
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
 # android.permissions =  WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, INTERNET
+android.permissions = READ_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -281,8 +282,8 @@ android.logcat_filters = *:S python:D
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
 # android.archs = arm64-v8a, armeabi-v7a
 # android.archs = arm64-v8a,x86
-android.archs = arm64-v8a
-
+# android.archs = arm64-v8a
+android.archs = armeabi-v7a
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
 # android.numeric_version = 1
