@@ -4,9 +4,6 @@
 
 import os
 from utils.layout import *
-if platform == 'android':
-    from utils.android_permissions import AndroidPermissions
-    from android import mActivity, autoclass, api_version
 
 
 class StyleApp(MDApp):
@@ -18,25 +15,32 @@ class StyleApp(MDApp):
         self.start = False
         self.fps = 33
         self.frame_count = 0
-        
-
+     
     if DEBUG:
-        
         def build_app(self, first=False):
-            # Create instance of MainScreen
-            Window.bind(on_keyboard = self.quit_app)
-
-            self.screen = MainScreen(name='main')
+            self.screen = self.build_utility()
             # Return the instance of MainScreen
-            return self.screen    
+            return self.screen   
     else:
         def build(self):
-            # Create instance of MainScreen
-            Window.bind(on_keyboard = self.quit_app)
-
-            self.screen = MainScreen(name='main')
+            self.screen = self.build_utility()
             # Return the instance of MainScreen
             return self.screen    
+    def build_utility(self):
+        if platform == 'android':
+            Window.bind(on_keyboard = self.quit_app)
+            # create chooser listener
+            self.chooser = Chooser(self.chooser_callback)
+    
+            # cleanup from last time if Android didn't
+            temp = SharedStorage().get_cache_dir()
+            if temp and exists(temp):
+                rmtree(temp)
+
+        self.screen = MainScreen(name='main')
+        # Return the instance of MainScreen
+        return self.screen   
+        
     def on_start(self): 
         if platform == 'android':
             self.dont_gc = AndroidPermissions(self.start_app)
@@ -97,18 +101,20 @@ class StyleApp(MDApp):
         # Clock.schedule_once(self.update)
         
             
-    def upload_video(self):
+    def chooser_start(self):
         '''
         Call plyer filechooser API to run a filechooser Activity.
         '''
-        # filters = [ '*.mp4']  # add more video file extensions here
-        # filters = [ ]  # add more video file extensions here
-        path = './assets/videos/*'
-        print(f"{path[:-1]}: ",os.path.isdir(path[:-1]))
-        print(os.listdir(path[:-1]))
-        # filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
-        filechooser.open_file(on_selection=self.handle_selection, path=path)
+        if platform == 'android':
+            self.chooser.choose_content("video/*")
+        else:
+            # filters = [ '*.mp4']  # add more video file extensions here
+            path = './assets/videos/*'
+            # filechooser.open_file(filters=filters, on_selection=self.handle_selection, path=path)
+            filechooser.open_file(on_selection=self.handle_selection, path=path)
+
         self.process_after_video()
+        
     def handle_selection(self, selection):
         '''
         Callback function for handling the selection response from Activity.
@@ -117,9 +123,22 @@ class StyleApp(MDApp):
             self.selection = selection
             print("Uploading video...")
             # Load the selected video file
-            self.display(self.selection[0])
+            path = self.selection[0]
+            self.display(path)
 
+    def chooser_callback(self,uri_list):
+        try:
+            ss = SharedStorage()
+            for uri in uri_list:
+                # copy to private
+                path = ss.copy_from_shared(uri)
+                self.display(path)
 
+        except Exception as e:
+            Logger.warning('StreetStat.chooser_callback():')
+            Logger.warning(str(e))
+
+    @mainthread
     def display(self, vid_path):
         # Create a video capture object for the selected video file
         print(f'load file: {vid_path}')

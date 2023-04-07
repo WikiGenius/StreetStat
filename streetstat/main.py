@@ -11,9 +11,6 @@ import matplotlib.pyplot as plt
 
 if platform == 'android':
     from android.storage import app_storage_path
-
-    app_storage_directory_path = app_storage_path()
-    print(f"app_storage_directory_path: {app_storage_directory_path}")
     
     
 if platform !='android':

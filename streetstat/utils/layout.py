@@ -21,7 +21,15 @@ import random
 import numpy as np
 # from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 from kivy_garden.backend_kivyagg import FigureCanvasKivyAgg
-
+from kivy.clock import mainthread
+if platform == 'android':
+    from utils.android_permissions import AndroidPermissions
+    from android import mActivity, autoclass, api_version
+    from androidstorage4kivy import SharedStorage, Chooser
+    from os.path import exists, join
+    from shutil import rmtree
+    from kivy.logger import Logger
+    
 if DEBUG:
     from kivymd.tools.hotreload.app import MDApp
 else:
