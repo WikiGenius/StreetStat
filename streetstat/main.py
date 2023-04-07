@@ -8,10 +8,6 @@ import utils
 import re
 import time
 import matplotlib.pyplot as plt
-
-if platform == 'android':
-    from android.storage import app_storage_path
-    
     
 if platform !='android':
     Window.size = (400, 800)
