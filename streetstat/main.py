@@ -33,7 +33,7 @@ class StreetStat(StyleApp):
         self.T = 0
         self.frame_counts  = []
     def on_start(self): 
-        
+        super().on_start()
         # Create initial bar chart
         self.create_init_bar()
         self.process = utils.Process(self.screen, self.pattern, self.canvas,  self.fig, self.ax ) 

@@ -4,6 +4,9 @@
 
 import os
 from utils.layout import *
+if platform == 'android':
+    from android_permissions import AndroidPermissions
+    from android import mActivity, autoclass, api_version
 
 
 class StyleApp(MDApp):
@@ -21,16 +24,33 @@ class StyleApp(MDApp):
         
         def build_app(self, first=False):
             # Create instance of MainScreen
+            Window.bind(on_keyboard = self.quit_app)
+
             self.screen = MainScreen(name='main')
             # Return the instance of MainScreen
             return self.screen    
     else:
         def build(self):
             # Create instance of MainScreen
+            Window.bind(on_keyboard = self.quit_app)
+
             self.screen = MainScreen(name='main')
             # Return the instance of MainScreen
             return self.screen    
+    def on_start(self): 
+        if platform == 'android':
+            self.dont_gc = AndroidPermissions(self.start_app)
     
+    def start_app(self):
+        self.dont_gc = None
+        
+    def quit_app(self,window,key,*args):
+        if key == 27:
+            mActivity.finishAndRemoveTask() 
+            return True   
+        else:
+            return False    
+
     def analyse_image(self, frame):
         return frame
     def process_after_video(self):
@@ -94,10 +114,10 @@ class StyleApp(MDApp):
             self.selection = selection
             print("Uploading video...")
             # Load the selected video file
-            self.start_app(self.selection[0])
+            self.display(self.selection[0])
 
 
-    def start_app(self, vid_path):
+    def display(self, vid_path):
         # Create a video capture object for the selected video file
         print(f'load file: {vid_path}')
         print(f'file exist: {os.path.isfile(vid_path)}')
