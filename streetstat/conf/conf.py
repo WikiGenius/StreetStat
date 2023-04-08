@@ -21,7 +21,7 @@ if PLATFORM_ANDROID:
 
     
 ###########################<GLOBAL SETTINGS>###############################
-THREAD = False
+THREAD = True
 DEBUG=False
 BAR_OPACITY = 0.8
 MAX_FRAMES = 6

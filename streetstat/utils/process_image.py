@@ -52,25 +52,11 @@ class Process:
                 self.traffic_process()
     
     def traffic_process(self):
-        
-        conf_thres = self.screen.conf_thres.value / 100
-        iou_thres = self.screen.iou_thres.value / 100
+
+        self.conf_thres = self.screen.conf_thres.value / 100
+        self.iou_thres = self.screen.iou_thres.value / 100
         self.get_classes()
-        dets, frame_info = self.detector.detect(self.frame, conf_thres=conf_thres, iou_thres=iou_thres)
-        self.frame, self.counts_dict, self.colors_dict = utils.draw_traffic(self.frame, frame_info, dets, visualize=self.visualize, filter_classes=self.classes, conf_thres = conf_thres)
-        
-        counts = list(self.counts_dict.values())
-        self.colors = list(self.colors_dict.values())
-        # Append counts for this frame to the list of frame counts
-        self.frame_counts.append(counts)
-        # Remove oldest frame if maximum number of frames is reached
-        if len(self.frame_counts) > self.max_frames:
-            self.frame_counts.pop(0)
-        # Update bar chart with counts for each object class for each frame
-        self.bar_index.append(len(self.bar_index))
-        if len(self.bar_index) > self.max_frames:
-            self.bar_index.pop(0)
-        
+        self.dets, self.frame_info = self.detector.detect(self.frame, conf_thres=self.conf_thres, iou_thres=self.iou_thres)
         
         self.traffic_process_started = True    
          
@@ -85,9 +71,22 @@ class Process:
         if not THREAD:
             self.traffic_process()
         else:
-            time.sleep(0.05)
+            # time.sleep(0.05)
             pass
         if self.traffic_process_started: 
+            self.frame, self.counts_dict, self.colors_dict = utils.draw_traffic(self.frame, self.frame_info, self.dets, visualize=self.visualize, filter_classes=self.classes, conf_thres = self.conf_thres )
+
+            counts = list(self.counts_dict.values())
+            self.colors = list(self.colors_dict.values())
+            # Append counts for this frame to the list of frame counts
+            self.frame_counts.append(counts)
+            # Remove oldest frame if maximum number of frames is reached
+            if len(self.frame_counts) > self.max_frames:
+                self.frame_counts.pop(0)
+            # Update bar chart with counts for each object class for each frame
+            self.bar_index.append(len(self.bar_index))
+            if len(self.bar_index) > self.max_frames:
+                self.bar_index.pop(0)
             try:
                 self.update_bar()
             except Exception as e:
