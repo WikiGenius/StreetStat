@@ -106,7 +106,8 @@ class Process:
         # Iterate over each object class and each frame
         for i in range(self.n_classes):
             counts = [frame_counts[i] for frame_counts in self.frame_counts] # Get counts for object class i for all frames
-            
+            if not self.colors[i]:
+                continue
             bp = self.ax.bar(np.arange(len(self.bar_index)) + (i * self.bar_width), 
                               counts, self.bar_width, alpha=BAR_OPACITY, 
                               color=self.colors[i], label=self.classes[i], linewidth=1)
