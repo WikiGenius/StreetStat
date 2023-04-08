@@ -1,11 +1,13 @@
 import pandas as pd
 from kivy import platform
+import os
 
 if platform == 'android':
     from androidstorage4kivy import SharedStorage
     
 def generate_xlsx(historical_frames, current_frame, T,  filename='report.xlsx', skip_frames = 1):
     # Create a DataFrame with the data
+    print('generate_xlsx: ')
     df = pd.DataFrame(historical_frames, columns=current_frame.keys())
     
     # Add a timestamp index
@@ -15,7 +17,10 @@ def generate_xlsx(historical_frames, current_frame, T,  filename='report.xlsx', 
     
     # Save the DataFrame to an Excel file
     report_path = './assets/report/' +  filename
+    print('start write using df')
     df.to_excel(report_path, index=False)
+    print(f'report exist: {os.path.isfile(report_path)}')
+
     if platform == 'android':
         ss = SharedStorage()
         # copy to private

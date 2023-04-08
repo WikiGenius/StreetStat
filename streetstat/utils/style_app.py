@@ -63,8 +63,6 @@ class StyleApp(MDApp):
     def update(self, *args):
         # Read a frame from the video capture device
         ret, frame = self.capture.read()
-        print(f"ret: {ret}")
-        print(f"frame: {frame}")
         # Stop the detector if there are no more frames
         if not ret:
             # self.screen.detection_image.source = './data/upload.png'
@@ -76,11 +74,12 @@ class StyleApp(MDApp):
         # Perform object detection on the frame using the YOLOv8n model
         if self.start:
             frame = self.analyse_image(frame)
+            cv2.line(frame, (20, 25), (127, 25), [85, 45, 255], 30)
+            cv2.putText(frame, f'FPS: {int(self.fps)}', (11, 35), 0, 1, [
+                    225, 255, 255], thickness=2, lineType=cv2.LINE_AA)
         frame = create_rounded_img(frame, border_radius=40)
         
-        cv2.line(frame, (20, 25), (127, 25), [85, 45, 255], 30)
-        cv2.putText(frame, f'FPS: {int(self.fps)}', (11, 35), 0, 1, [
-                    225, 255, 255], thickness=2, lineType=cv2.LINE_AA)
+
         # Flip the frame vertically for display purposes
         buf = cv2.flip(frame, 0).tobytes()
         # Create a Kivy Texture from the frame
@@ -145,7 +144,7 @@ class StyleApp(MDApp):
         print(f'file exist: {os.path.isfile(vid_path)}')
         self.capture = cv2.VideoCapture(vid_path)
         # Schedule the update function to be called at 33 FPS
-        Clock.schedule_interval(self.update, 1/self.fps)
+        Clock.schedule_interval(self.update, 1/33)
         # Clock.schedule_once(self.update)
 
 if __name__ == '__main__':
