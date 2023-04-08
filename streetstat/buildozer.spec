@@ -36,7 +36,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, plyer,numpy, android, Pillow, opencv, tflite-runtime,pandas,matplotlib,androidstorage4kivy
+requirements = python3, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, plyer,numpy, android, Pillow, opencv, tflite-runtime,pandas,matplotlib,androidstorage4kivy,jdcal,xlrd,xlsxwriter,openpyxl
 
 # (str) Presplash of the application
 # presplash.filename = %(source.dir)s/data/presplash.png
