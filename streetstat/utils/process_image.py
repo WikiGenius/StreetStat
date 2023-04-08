@@ -33,7 +33,7 @@ class Process:
             from model_tflite import Detector
             self.detector = Detector(model_tflite_path)
         
-        # Variable to control when model is stopped
+        # Variable to control multi threads
         self.stopped = False
         self.start_process = False
         self.traffic_process_started = False
