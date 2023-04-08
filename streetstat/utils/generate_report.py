@@ -14,12 +14,16 @@ def generate_xlsx(historical_frames, current_frame, T,  filename='report.xlsx', 
     MAX_FRAMES = len(historical_frames)
     timestamp = range(0, T, skip_frames)[-MAX_FRAMES:]
     df.insert(0, "T (s)", timestamp)
-    
+
+    report_dir = './assets/report/'
+
+    # check if the report_dir exists
+    if not os.path.exists(report_dir):
+        # create a directory
+        os.mkdir(report_dir)
+    report_path = report_dir +  filename
     # Save the DataFrame to an Excel file
-    report_path = './assets/report/' +  filename
-    print('start write using df')
     df.to_excel(report_path, index=False)
-    print(f'report exist: {os.path.isfile(report_path)}')
 
     if platform == 'android':
         ss = SharedStorage()
