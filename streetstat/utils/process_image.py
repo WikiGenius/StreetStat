@@ -6,6 +6,8 @@ from conf import *
 import utils
 import numpy as np
 from utils.layout import create_figure_bar
+from threading import Thread
+import time
 
 class Process:
     def __init__(self, screen, pattern, canvas, fig, ax):
@@ -23,51 +25,77 @@ class Process:
         self.bar_plots = []
         self.bar_index = []
         self.T = 0
+        
         if not PLATFORM_ANDROID:
             import asone
             self.detector = asone.ASOne(detector=asone.YOLOV8N_PYTORCH ,use_cuda=True)
         else:
             from model_tflite import Detector
-            if THREAD:
-                self.detector = Detector(model_tflite_path).start()
-            else:
-                self.detector = Detector(model_tflite_path)
-                
-    def detect_traffic(self, frame):
-        if self.T % SKIP_FRAMES != 0:
-            self.T +=1
-            return frame, self.counts_dict, self.T, self.frame_counts
+            self.detector = Detector(model_tflite_path)
+        
+        # Variable to control when model is stopped
+        self.stopped = False
+        self.start_process = False
+        self.traffic_process_started = False
+    def start(self):
+        # Start the thread that update_detection
+        Thread(target=self.update_process, args=(), daemon=True).start()
+        return self
+
+    def stop(self):
+        # Indicate that the camera and thread should be stopped
+        self.stopped = True
+        
+    def update_process(self):
+        while not self.stopped:
+            if self.start_process:
+                self.traffic_process()
+    
+    def traffic_process(self):
         
         conf_thres = self.screen.conf_thres.value / 100
         iou_thres = self.screen.iou_thres.value / 100
         self.get_classes()
-        dets, frame_info = self.detector.detect(frame, conf_thres=conf_thres, iou_thres=iou_thres)
-        frame_vis, self.counts_dict, colors_dict = utils.draw_traffic(frame, frame_info, dets, visualize=self.visualize, filter_classes=self.classes, conf_thres = conf_thres)
+        dets, frame_info = self.detector.detect(self.frame, conf_thres=conf_thres, iou_thres=iou_thres)
+        self.frame, self.counts_dict, self.colors_dict = utils.draw_traffic(self.frame, frame_info, dets, visualize=self.visualize, filter_classes=self.classes, conf_thres = conf_thres)
         
         counts = list(self.counts_dict.values())
-        self.colors = list(colors_dict.values())
-
+        self.colors = list(self.colors_dict.values())
         # Append counts for this frame to the list of frame counts
         self.frame_counts.append(counts)
-
         # Remove oldest frame if maximum number of frames is reached
         if len(self.frame_counts) > self.max_frames:
             self.frame_counts.pop(0)
-
         # Update bar chart with counts for each object class for each frame
         self.bar_index.append(len(self.bar_index))
         if len(self.bar_index) > self.max_frames:
             self.bar_index.pop(0)
+        
+        
+        self.traffic_process_started = True    
+         
+    def detect_traffic(self, frame, start):
+        self.frame = frame.copy()
+        self.start_process = start   
+        self.stopped = False
         self.T +=1
-
-    
-        try:
-            self.update_bar()
-        except Exception as e:
-            print(f"Exception: {e}")
-            self.reset_bar_chart()
+        
+        if self.T % SKIP_FRAMES != 0:
+            return self.frame, self.counts_dict, self.T, self.frame_counts    
+        if not THREAD:
+            self.traffic_process()
+        else:
+            time.sleep(0.05)
+            pass
+        if self.traffic_process_started: 
+            try:
+                self.update_bar()
+            except Exception as e:
+                print(f"Exception: {e}")
+                self.reset_bar_chart()
             
-        return frame_vis, self.counts_dict, self.T, self.frame_counts
+
+        return self.frame, self.counts_dict, self.T, self.frame_counts
 
     def update_bar(self):
         # Update bar chart with new data

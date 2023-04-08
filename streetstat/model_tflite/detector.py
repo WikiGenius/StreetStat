@@ -20,27 +20,7 @@ class Detector:
             self.input_shape = self.input_details[0]['shape'][2:]
             
         self.output_data = []
-        # Variable to control when model is stopped
-        self.stopped = True
-        self.detect_started = False
-        self.thread_detect = False
-        
-    def start(self):
-        # Start the thread that update_detection
-        self.thread_detect = True
-        Thread(target=self.update_detection, args=(), daemon=True).start()
-        return self
 
-    def stop(self):
-        # Indicate that the camera and thread should be stopped
-        self.stopped = True
-        
-    def update_detection(self):
-        while True:
-            if not self.stopped:
-                self.detection_process()
-
-                    
     def detection_process(self):
 
         transpose=False
@@ -57,18 +37,11 @@ class Detector:
             self.output_data if isinstance(self.output_data, np.ndarray) else self.output_data.numpy()
             self.output_data = np.squeeze(self.output_data[0])
         
-        self.detect_started = True
-            
     def detect(self, img, conf_thres=0.25, iou_thres=0.45):
         self.img = img.copy()
         self.conf_thres = conf_thres
         self.iou_thres = iou_thres
-        self.stopped = False
-        if not self.thread_detect:
-            self.detection_process()
-        else:
-            time.sleep(0.05)
-            pass
+        self.detection_process()
 
         preprocess_info = (self.ratio, self.dwdh)
         return self.output_data, preprocess_info

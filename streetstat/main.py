@@ -29,10 +29,14 @@ class StreetStat(StyleApp):
         super().on_start()
         # Create initial bar chart
         self.create_init_bar()
-        self.process = utils.Process(self.screen, self.pattern, self.canvas,  self.fig, self.ax ) 
+        if THREAD:
+            self.process = utils.Process(self.screen, self.pattern, self.canvas,  self.fig, self.ax ).start()
+        else:
+            self.process = utils.Process(self.screen, self.pattern, self.canvas,  self.fig, self.ax )
         
     def on_stop(self):
         # Stop the detector when the app is closed
+        self.process.stop()
         pass  
     
     def analyse_image(self, frame):
@@ -40,7 +44,7 @@ class StreetStat(StyleApp):
 
         process_time = time.time()
         
-        frame_vis, self.counts_dict, self.T, self.frame_counts = self.process.detect_traffic(frame.copy())
+        frame_vis, self.counts_dict, self.T, self.frame_counts = self.process.detect_traffic(frame.copy(), start = self.start )
 
         process_time = time.time() - process_time
         self.fps = 1 / process_time
