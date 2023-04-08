@@ -74,6 +74,8 @@ class StyleApp(MDApp):
         # Perform object detection on the frame using the YOLOv8n model
         if self.start:
             frame = self.analyse_image(frame)
+            if self.fps >= 33:
+                self.fps = 33
             cv2.line(frame, (20, 25), (127, 25), [85, 45, 255], 30)
             cv2.putText(frame, f'FPS: {int(self.fps)}', (11, 35), 0, 1, [
                     225, 255, 255], thickness=2, lineType=cv2.LINE_AA)
