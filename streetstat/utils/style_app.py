@@ -80,7 +80,8 @@ class StyleApp(MDApp):
             cv2.putText(frame, f'FPS: {int(self.fps)}', (11, 35), 0, 1, [
                     225, 255, 255], thickness=2, lineType=cv2.LINE_AA)
         frame = create_rounded_img(frame, border_radius=40)
-        
+        if platform == 'android':
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # Flip the frame vertically for display purposes
         buf = cv2.flip(frame, 0).tobytes()
