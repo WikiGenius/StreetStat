@@ -80,20 +80,14 @@ class StyleApp(MDApp):
             cv2.putText(frame, f'FPS: {int(self.fps)}', (11, 35), 0, 1, [
                     225, 255, 255], thickness=2, lineType=cv2.LINE_AA)
         frame = create_rounded_img(frame, border_radius=40)
-        if platform == 'android':
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # Flip the frame vertically for display purposes
         buf = cv2.flip(frame, 0).tobytes()
         # Create a Kivy Texture from the frame
-
-        if platform == 'android':
-            img_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='rgb')
-            img_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
-            
-        else:
-            img_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
-            img_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')      
+        
+        img_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='rgb')
+        img_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
 
         # Update the image in SearchDashboard with the new frame
         self.screen.detection_image.texture = img_texture
