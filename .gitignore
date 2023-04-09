@@ -21,3 +21,4 @@ dist/
 images_dataset
 debug*
 ./streetstat/assets/report/*
+*.pyc
