@@ -92,7 +92,8 @@ class Process:
             except Exception as e:
                 print(f"Exception: {e}")
                 self.reset_bar_chart()
-            
+        if len(self.frame_counts) > 0 and len(self.frame_counts[0]) != len(self.counts_dict.keys()):
+             self.reset_bar_chart()
 
         return self.frame, self.counts_dict, self.T, self.frame_counts
 
